@@ -1,0 +1,676 @@
+// Importando Fontes do Google
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+
+// Variáveis de Cor
+$cor-primaria: #254166;
+$cor-secundaria: #4F970F;
+$cor-terciaria: #5d3019;
+$cor-fundo: #f5f5f5;
+$cor-fundo-input: #ECF3F5;
+$cor-fundo-modal: #FFFDF2;
+$cor-texto: #666;
+$cor-borda: #ccc;
+$cor-branco: #fff;
+$cor-preto: #000;
+$cor-botao-cancelar: #e40005;
+$cor-botao-deletar: #e40005;
+
+// Outras Variáveis
+$fonte-principal: 'Quicksand', sans-serif;
+$raio-borda: 5px;
+
+// Mixins
+@mixin centralizar-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin estilos-botao($cor-fundo, $cor-texto) {
+  background-color: $cor-fundo;
+  color: $cor-texto;
+  border: none;
+  padding: 10px 20px;
+  border-radius: $raio-borda;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border 0.3s;
+}
+
+// Estilos Globais
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: $fonte-principal;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  min-height: 100vh;
+
+  > *:not(footer) {
+    flex: 1 0 auto;
+  }
+}
+
+// Estilos de Layout
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding-top: 70px;
+  padding-bottom: 50px;
+}
+
+// Estilos do Cabeçalho
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: $cor-branco;
+  z-index: 1000;
+  border-bottom: 1px solid darken($cor-fundo, 10%);
+
+  .header-link {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: $cor-fundo;
+    }
+
+    #logo {
+      width: 50px;
+      margin-right: 10px;
+    }
+
+    h1 {
+      font-size: 24px;
+      color: $cor-primaria;
+      margin: 0;
+    }
+  }
+}
+
+// Estilos do itens pedidos
+.itens-pedido-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.itens-pedido-table th,
+.itens-pedido-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.itens-pedido-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.itens-pedido-table tfoot {
+  font-weight: bold;
+  background-color: #f2f2f2;
+}
+
+// Estilos de Menu
+.menu-title {
+  font-weight: 600;
+  font-size: 30px;
+  margin: 100px 0 20px;
+  width: 100%;
+  text-align: center;
+}
+
+.menu-divider {
+  border: 0;
+  border-top: 1px solid darken($cor-fundo, 10%);
+  margin: 20px 0;
+
+  &-80 {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  &-100 {
+    width: 100%;
+  }
+}
+
+// Estilos de Conteúdo
+main .content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  margin-top: 20px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Estilos de Botões
+.back-button {
+  position: fixed;
+  top: 80px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  @include centralizar-flex;
+  cursor: pointer;
+  z-index: 1001;
+  background-color: $cor-branco;
+  border: none;
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
+
+  a {
+    @include centralizar-flex;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+  }
+
+  button {
+    background-color: $cor-branco;
+    border: none;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.all-form {
+  width: 100%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.delete-button {
+  background-color: $cor-botao-deletar;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.update-button {
+  background-color: $cor-secundaria;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+.action-buttons {
+  position: absolute;
+  top: 100px; 
+  right: 50px; 
+  background-color: $cor-terciaria;
+  padding: 10px 20px;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  @include estilos-botao($cor-terciaria, $cor-branco);
+
+  a {
+    text-decoration: none; 
+    color: inherit; 
+  }
+}
+
+.add-button {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  padding: 8px 30px;
+  @include estilos-botao($cor-secundaria, $cor-branco);
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
+  z-index: 1001;
+}
+
+// Estilos de Formulário
+.all-form {
+  width: 200%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: $cor-branco;
+  padding: 30px;
+  border-radius: 10px;
+
+  label {
+    font-weight: bold;
+    text-align: left;
+  }
+
+
+  input[type="text"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="date"],
+  select {
+    color: $cor-texto;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid $cor-borda;
+    border-radius: $raio-borda;
+    background-color: $cor-fundo-input;
+    box-sizing: border-box;
+  }
+}
+
+// Estilos de Botões de Formulário
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  width: 100%;
+
+  button {
+    width: auto;
+    min-width: 100px;
+    padding: 10px 20px;
+  }
+
+  .cancel-button, .save-button {
+    font-family: $fonte-principal;
+    padding: 10px 20px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .cancel-button {
+    @include estilos-botao($cor-botao-cancelar, $cor-branco);
+  }
+
+  .save-button {
+    @include estilos-botao($cor-secundaria, $cor-branco);
+  }
+}
+
+// Estilos da Equipe
+.team-members-container {
+  background-color: $cor-primaria;
+  font-size: 10px;
+  width: 100%;
+  color: $cor-branco;
+
+  .developers-title {
+    font-size: 20px;
+    font-weight: 200;
+    text-align: center;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding-bottom: 0.5rem;
+  }
+
+  .team-members {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $cor-primaria;
+
+    .member {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 10px 50px;
+
+      .member-image {
+        width: 90px;
+        height: 90px;
+        border-radius: 100%;
+        object-fit: cover;
+        margin-bottom: 10px;
+      }
+
+      .member-name {
+        font-size: 12px;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      .member-links {
+        display: flex;
+        justify-content: center;
+
+        .member-link {
+          margin: 0 5px;
+
+          .link-icon {
+            width: 20px;
+            height: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Estilos de Detalhes
+.details {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: $cor-branco;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: left;
+
+  input {
+    font-weight: 400;
+    color: $cor-texto;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid $cor-borda;
+    border-radius: $raio-borda;
+    background-color: $cor-fundo-input;
+    pointer-events: none;
+  }
+}
+
+// Estilos de Lista
+.list {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 40px;
+  background-color: $cor-fundo;
+  padding: 30px;
+  border-radius: $raio-borda;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: $cor-branco;
+  border-radius: $raio-borda;
+  margin-bottom: 10px;
+
+  .item-content {
+    display: flex;
+    align-items: center; /* Isso centraliza verticalmente */
+  }
+  
+  .item-content img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+  }
+  
+  .item-name {
+    font-size: 16px;
+    line-height: 24px; /* Isso ajuda a alinhar o texto verticalmente com o ícone */
+    cursor: pointer;
+  }
+
+  img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+
+  a.all-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    flex-grow: 1;
+  }
+
+  span {
+    text-align: left;
+  }
+
+  .delete-button {
+    @include estilos-botao($cor-botao-deletar, $cor-branco);
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+}
+
+
+
+
+
+// Estilos do Rodapé
+footer {
+  width: 100%;
+  padding: 5px 0;
+  background: $cor-primaria;
+  font-size: 10px;
+  text-align: center;
+  margin-top: auto;
+
+  .credits {
+    padding: 5px 0 5px 0;
+    margin: 0;
+    font-size: 12px;
+    color: $cor-branco;
+  }
+}
+
+// Estilos de Botão Personalizado
+.custom-button {
+  flex-basis: calc(50% - 10px);
+  background-color: $cor-primaria;
+  border-radius: 8px;
+  text-decoration: none;
+  color: $cor-branco;
+  font-weight: lighter;
+  overflow: hidden;
+
+  .button-content {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+  }
+
+  .button-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+  }
+
+  .button-text {
+    flex-grow: 1;
+    text-align: center;
+  }
+}
+
+.menu-buttons-horizontal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+// Estilos de Modal
+.modal {
+  @include centralizar-flex;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+
+  &-content {
+    background-color: $cor-fundo-modal;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid $cor-texto;
+    width: 80%;
+    max-width: 600px;
+    text-align: left;
+    border-radius: 10px;
+
+    h2 {
+      text-align: center;
+      font-weight: 900;
+    }
+  }
+
+  &-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+
+    .cancel-button,
+    .confirm-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .cancel-button {
+      @include estilos-botao($cor-botao-cancelar, $cor-branco);
+
+      &:hover {
+        background-color: $cor-branco;
+        color: $cor-botao-cancelar;
+        border: 2px solid $cor-botao-cancelar;
+      }
+    }
+
+    .confirm-button {
+      @include estilos-botao($cor-secundaria, $cor-branco);
+      border: 2px solid $cor-secundaria;
+
+      &:hover {
+        background-color: $cor-branco;
+        color: $cor-secundaria;
+      }
+    }
+  }
+}
+
+.close-button {
+  color: $cor-texto;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+
+  &:hover,
+  &:focus {
+    color: $cor-preto;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
+
+.delete-text {
+  color: $cor-primaria;
+  font-weight: 700;
+}
+
+#product-name,
+#order-name,
+#supplier-name,
+#user-name {
+  font-weight: 700;
+}
+
+// Estilos Responsivos
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+
+    h1 {
+      font-size: 20px;
+      margin-top: 10px;
+    }
+  }
+
+  .menu-title {
+    font-size: 24px;
+    margin: 120px 0 20px;
+  }
+
+  .custom-button, .add-button {
+    width: 100%;
+    max-width: 200px;
+    margin: 10px 0; 
+  }
+
+  .form-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    
+    .cancel-button, .save-button {
+      margin-bottom: 10px;
+    }
+  }
+
+  .back-button, .add-button {
+    position: static;
+    margin: 10px;
+  }
+
+  .content {
+    padding: 10px;
+  }
+
+  .all-form, .details {
+    padding: 20px;
+  }
+}

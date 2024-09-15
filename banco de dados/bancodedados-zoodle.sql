@@ -1,0 +1,53 @@
+CREATE TABLE fornecedor (
+    id INT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    endereco VARCHAR(200),
+    telefone VARCHAR(20)
+);
+
+CREATE TABLE tipo_usuario (
+    id INT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE usuario (
+    id INT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    tipo_Usuario INT,
+    FOREIGN KEY (tipo_usuario) REFERENCES tipo_usuario(id)
+);
+
+
+CREATE TABLE produto (
+    id INT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    tipo VARCHAR(50),
+    quantidade INT,
+    preco DECIMAL(10, 2),
+    id_Fornecedor INT,
+    FOREIGN KEY (id_Fornecedor) REFERENCES fornecedor(id)
+
+);
+
+CREATE TABLE pedido (
+    id INT PRIMARY KEY,
+    data VARCHAR (20) NOT NULL,
+    id_Usuario INT,
+    FOREIGN KEY (id_Usuario) REFERENCES usuario(id)
+);
+
+CREATE TABLE Itens_Pedido (
+    id_Pedido INT,
+    id_Produto INT,
+    quantidade INT,
+    CONSTRAINT PK_ITENS_PEDIDO PRIMARY KEY (ID_PEDIDO, ID_PRODUTO),
+    CONSTRAINT FK_ITENS_PEDIDO_PEDIDO FOREIGN KEY (ID_PEDIDO)
+        REFERENCES PEDIDO(ID),
+    CONSTRAINT FK_ITENS_PEDIDO_PRODUTO FOREIGN KEY (ID_PRODUTO)
+        REFERENCES PRODUTO(ID)
+);
+
+ALTER TABLE SYSTEM.ITENS_PEDIDO
+ADD CONSTRAINT FK_ITENS_PEDIDO_PEDIDO
+FOREIGN KEY (ID_PEDIDO)
+REFERENCES SYSTEM.PEDIDO(ID);
