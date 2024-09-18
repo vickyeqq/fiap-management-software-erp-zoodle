@@ -80,7 +80,11 @@ const DetalhePedido = () => {
 
   return (
     <Layout title="DETALHES DO PEDIDO">
+      
       <div className="content">
+      <div className="action-buttons">
+        <a  onClick={handleEditItems} className="other-button">Editar Itens</a>
+      </div>
         <form className="all-form">
           <FormInput
             label="ID do Pedido"
@@ -108,7 +112,7 @@ const DetalhePedido = () => {
         <ItensPedidoList itens={itensPedido} />
 
         <div className="button-container">
-          <button type="button" className="edit-button" onClick={handleEditItems}>Editar Itens</button>
+
           <button type="button" className="update-button" onClick={handleUpdate}>Atualizar Pedido</button>
           <button type="button" className="delete-button" onClick={handleDelete}>Deletar Pedido</button>
         </div>

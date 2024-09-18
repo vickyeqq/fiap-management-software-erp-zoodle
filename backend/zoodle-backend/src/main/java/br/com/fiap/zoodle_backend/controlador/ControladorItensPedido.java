@@ -37,12 +37,6 @@ public class ControladorItensPedido {
         return ResponseEntity.ok(itensPedido);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ItensPedido> atualizarItensPedido(@PathVariable Long id, @RequestBody ItensPedido itensPedido) {
-        Optional<ItensPedido> itensPedidoAtualizadoOptional = servicoItensPedido.atualizarItensPedido(id, itensPedido);
-        return itensPedidoAtualizadoOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
     @DeleteMapping("/{idPedido}/{idProduto}")
     public ResponseEntity<String> deletarItensPedido(@PathVariable Long idPedido, @PathVariable Long idProduto) {
         boolean statusDelecao = servicoItensPedido.deletarItensPedido(idPedido, idProduto);

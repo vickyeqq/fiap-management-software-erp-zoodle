@@ -98,35 +98,42 @@ const EditarItensPedido = () => {
 
   return (
     <Layout title={`Editar Itens do Pedido #${id}`}>
-      <div className="pedido-info">
-        <p><strong>ID do Pedido:</strong> {pedido.id}</p>
-        <p><strong>Data do Pedido:</strong> {pedido.data}</p>
-        <p><strong>ID do Usuário:</strong> {pedido.idUsuario}</p>
-      </div>
-      <div className="action-buttons">
-        <button onClick={handleAddNewItem} className="add-button">Adicionar Item</button>
-      </div>
-      {itens.map((item, index) => (
-        <div key={index} className="item-pedido">
-          <FormSelect
-            label="Produto"
-            value={item.idProduto}
-            onChange={(e) => handleItemChange(index, 'idProduto', e.target.value)}
-            options={products.map(p => ({ value: p.id, label: p.nome }))}
-          />
-          <FormInput
-            label="Quantidade"
-            type="number"
-            value={item.quantidade}
-            onChange={(e) => handleItemChange(index, 'quantidade', e.target.value)}
-            min="1"
-          />
-          <button onClick={() => handleAddOrUpdateItem(item, index)}>Adicionar/Atualizar</button>
-          <button onClick={() => handleRemoveItem(index)}>Remover</button>
+      <div className="content">
+        <div className="all-form">
+          <div className="pedido-info">
+            <h2>Informações do Pedido</h2>
+            <p><strong>ID do Pedido:</strong> {pedido.id}</p>
+            <p><strong>Data do Pedido:</strong> {new Date(pedido.data).toLocaleDateString()}</p>
+            <p><strong>ID do Usuário:</strong> {pedido.idUsuario}</p>
+          </div>
+          <button onClick={handleAddNewItem} className="add-button">Adicionar Item</button>
+          {itens.map((item, index) => (
+            <div key={index} className="item-pedido">
+              <div className="item-pedido-content">
+                <FormSelect
+                  label="Produto"
+                  value={item.idProduto}
+                  onChange={(e) => handleItemChange(index, 'idProduto', e.target.value)}
+                  options={products.map(p => ({ value: p.id, label: p.nome }))}
+                />
+                <FormInput
+                  label="Quantidade"
+                  type="number"
+                  value={item.quantidade}
+                  onChange={(e) => handleItemChange(index, 'quantidade', e.target.value)}
+                  min="1"
+                />
+                <div className="item-pedido-buttons">
+                  <button onClick={() => handleAddOrUpdateItem(item, index)} className="save-button neutral-button">Salvar</button>
+                  <button onClick={() => handleRemoveItem(index)} className="remove-button neutral-button">Remover</button>
+                </div>
+              </div>
+            </div>
+          ))}
+          <div className="form-buttons">
+            <button onClick={() => navigate(`/detalhe-pedido/${id}`)} className="cancel-button">Voltar</button>
+          </div>
         </div>
-      ))}
-      <div className="form-buttons">
-        <button onClick={() => navigate(`/detalhe-pedido/${id}`)}>Voltar</button>
       </div>
     </Layout>
   );

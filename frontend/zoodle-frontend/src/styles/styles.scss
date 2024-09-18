@@ -112,19 +112,19 @@ header {
 
 .itens-pedido-table th,
 .itens-pedido-table td {
-  border: 1px solid #ddd;
+  border: 1px solid $cor-borda;
   padding: 8px;
   text-align: left;
 }
 
 .itens-pedido-table th {
-  background-color: #f2f2f2;
+  background-color: $cor-fundo;
   font-weight: bold;
 }
 
 .itens-pedido-table tfoot {
   font-weight: bold;
-  background-color: #f2f2f2;
+  background-color: $cor-fundo;
 }
 
 // Estilos de Menu
@@ -219,7 +219,7 @@ main .content {
 
 .delete-button {
   background-color: $cor-botao-deletar;
-  color: white;
+  color: $cor-branco;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -228,7 +228,7 @@ main .content {
 
 .update-button {
   background-color: $cor-secundaria;
-  color: white;
+  color: $cor-branco;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -266,6 +266,80 @@ main .content {
   font-weight: 400;
   text-decoration: none;
   z-index: 1001;
+}
+
+
+// Estilos do Itens Pedidos:
+.item-pedido {
+  margin-bottom: 15px;
+  
+  .item-pedido-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .form-select, .form-input {
+    flex: 1;
+    margin-bottom: 0;
+  }
+
+  .item-pedido-buttons {
+    display: flex;
+    gap: 10px;
+
+    button {
+      padding: 8px 15px;
+      font-size: 14px;
+    }
+  }
+}
+
+.add-button {
+  margin-bottom: 20px;
+  background-color: $cor-secundaria;
+  color: $cor-branco;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.neutral-button {
+  background-color: $cor-fundo;
+  color: $cor-texto;
+  border: 1px solid $cor-borda;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: $cor-fundo;
+  }
+}
+
+.cancel-button {
+  background-color: $cor-botao-cancelar;
+  color:  $cor-branco;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .item-pedido {
+    .item-pedido-content {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .item-pedido-buttons {
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+  }
 }
 
 // Estilos de Formulário
@@ -546,7 +620,7 @@ footer {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.4);
+  background-color: $cor-preto;
 
   &-content {
     background-color: $cor-fundo-modal;
